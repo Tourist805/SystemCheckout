@@ -12,7 +12,7 @@ public class Database implements IModel{
     private final ArrayList<StockItem> orderItems;
     private String separator = "\\|";
     ArrayList<IView> viewObservers = new ArrayList<>();
-
+    private double count = 0;
 
     public Database(){
         adminList = new ArrayList<>();
@@ -24,6 +24,7 @@ public class Database implements IModel{
     //
     public void addAdmin(Admin admin){
         adminList.add(admin);
+        notifyObservers();
     }
 
     public ArrayList<Admin> getAdminList() {
@@ -107,6 +108,7 @@ public class Database implements IModel{
 
     public void addItem(StockItem stockItem){
         items.add(stockItem);
+        notifyObservers();
     }
 
     public void removeItem(StockItem item){
@@ -249,12 +251,13 @@ public class Database implements IModel{
         for(int i = 0; i < orderItems.size(); i++){
             total += orderItems.get(i).getPrice();
         }
-
+        count = total;
         return total;
     }
 
     public void addOrderItems(StockItem item){
         orderItems.add(item);
+        notifyObservers();
     }
 
     public ArrayList<StockItem> getOrderItems() {
@@ -310,6 +313,7 @@ public class Database implements IModel{
             System.out.println("Error");
         }
         items.remove(index);
+        notifyObservers();
     }
 
     public void addElementToStock(int index, StockItem newItem){
@@ -317,5 +321,14 @@ public class Database implements IModel{
             System.out.println("Error");
         }
         items.add(index, newItem);
+        notifyObservers();
+    }
+
+    public boolean compareToGetCount(double value){
+        if(getCount() <= value){
+            return true;
+        }
+
+        return false;
     }
 }

@@ -25,6 +25,7 @@ public class AdminWorkView extends AbstractView{
 
     public AdminWorkView(Database database){
         this.database = database;
+        database.registerObserver(this);
 
         initUI();
         initialize();
@@ -206,12 +207,12 @@ public class AdminWorkView extends AbstractView{
     }
 
     @Override
-    public void setModel(IModel model) {
-
+    public void setModel(Database model) {
+        this.database = model;
     }
 
     @Override
     public void update() {
-
+        SwingUtilities.updateComponentTreeUI(this);
     }
 }

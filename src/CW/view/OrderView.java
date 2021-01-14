@@ -24,9 +24,9 @@ public class OrderView extends AbstractView {
     Database database;
 
     public OrderView(Database database){
-        ;
-        this.database = database;
 
+        this.database = database;
+        database.registerObserver(this);
         String[] col = {"Item  barcode", "Item Name", "Item Price"};
         DefaultTableModel tableModel = new DefaultTableModel(col, 0);
 
@@ -94,11 +94,11 @@ public class OrderView extends AbstractView {
 
     @Override
     public void update() {
-
+        SwingUtilities.updateComponentTreeUI(this);
     }
 
     @Override
-    public void setModel(IModel model) {
+    public void setModel(Database model) {
 
     }
 }

@@ -29,6 +29,7 @@ public class KioskView extends AbstractView {
     public KioskView(Database database){
         this.database = database;
         this.controller = controller;
+        database.registerObserver(this);
         //this.model = model;
         initUI();
         initialize();
@@ -105,13 +106,13 @@ public class KioskView extends AbstractView {
     @Override
     public void update() {
         if(database != null){
-
+            SwingUtilities.updateComponentTreeUI(this);
         }
     }
 
     @Override
-    public void setModel(IModel model) {
-
+    public void setModel(Database model) {
+        this.database = model;
     }
 
     private class ScanAction extends AbstractAction{
@@ -138,5 +139,14 @@ public class KioskView extends AbstractView {
             database.saveOrderItem(new File(filePath1));
         }
     }
+
+    private class PayAction extends AbstractAction{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
 
 }

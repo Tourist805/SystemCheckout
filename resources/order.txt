@@ -4,3 +4,4 @@ DG3829|Juice|2.72
 AB2020|Milk|1.99
 DG3829|Juice|2.72
 AD1898|Apple|1.88
+AC1827|Meal|5.98

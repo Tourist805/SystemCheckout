@@ -4,6 +4,8 @@ import CW.model.Database;
 import CW.view.KioskView;
 import org.w3c.dom.views.AbstractView;
 
+import java.io.File;
+
 public class OrderController extends AbstractController{
 
     private Database database;
@@ -14,7 +16,7 @@ public class OrderController extends AbstractController{
     }
 
     @Override
-    public void addAction() {
+    public void addAction(String action, Database database) {
 
     }
 

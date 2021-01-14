@@ -1,8 +1,7 @@
 package CW.view;
 
-import CW.Welcome;
+import CW.controller.AllViewsController;
 import CW.model.Database;
-import CW.model.IModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,13 +16,16 @@ public class AdminLoginView extends AbstractView{
     private JPasswordField passwordField;
     private Database database;
     private String filePath = "resources\\adminlogin.txt";
+    private AllViewsController controllerAll;
 
     public AdminLoginView(Database database){
         this.database = database;
+        database.registerObserver(this);
         initUI();
         initialize();
         setTitle("Login");
         setLocationRelativeTo(null);
+        controller = new AllViewsController(database,this);
     }
 
     public void initUI(){
@@ -44,8 +46,8 @@ public class AdminLoginView extends AbstractView{
     }
 
     @Override
-    public void setModel(IModel model) {
-
+    public void setModel(Database model) {
+        this.database = database;
     }
 
     private class SubmitAction extends AbstractAction{
@@ -63,9 +65,8 @@ public class AdminLoginView extends AbstractView{
                 database.loadAdmin(new File(filePath));
 
                 if(database.adminCheck(login, String.valueOf(passwd))){
-                    Welcome welcome = new Welcome();
+                    controller.addAction("AdminWorkView", database);
 
-                    welcome.setVisible(true);
                     System.out.println("Correct");
                     AdminLoginView.this.dispose();
                 }
@@ -126,6 +127,6 @@ public class AdminLoginView extends AbstractView{
 
     @Override
     public void update() {
-
+        SwingUtilities.updateComponentTreeUI(this);
     }
 }

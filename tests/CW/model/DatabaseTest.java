@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
 public class DatabaseTest {
     String filepathOrder = "resources\\order.txt";
     String filepathStock = "resources\\stock.txt";
+    String filepathAdmin = "resources\\adminlogin.txt";
     Database database;
     @BeforeClass
     public static void setUpBefore(){
@@ -41,5 +42,12 @@ public class DatabaseTest {
         item.setPrice(5.98);
 
         assertEquals(database.getStockItemAt(firstValue).getBarcode(), item.getBarcode());
+    }
+
+    @Test
+    public void testAdminCheck(){
+        database.loadAdmin(new File(filepathAdmin));
+
+        assertEquals(database.adminCheck("july78", "22222w2"),true );
     }
 }

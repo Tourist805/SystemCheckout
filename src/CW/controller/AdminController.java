@@ -8,22 +8,22 @@ import CW.view.AbstractView;
 import CW.view.AdminLoginView;
 import CW.view.IView;
 
+import java.io.File;
+
 public class AdminController extends AbstractController  {
     private Admin admin;
     private StockItem currentItem;
-    private Database database;
     private AdminLoginView adminLoginView;
 
 
-    public AdminController(IModel model, AbstractView view){
-        super(model, view);
+    public AdminController(Database database, AbstractView view){
+        super(database, view);
 
 
     }
 
-
     @Override
-    public void addAction() {
+    public void addAction(String action, Database database) {
 
     }
 

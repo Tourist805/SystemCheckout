@@ -1,20 +1,21 @@
 package CW.controller;
 
+import CW.model.Database;
 import CW.model.IModel;
 import CW.view.AbstractView;
 
 public abstract class AbstractController implements IController {
-    protected IModel model;
+    protected Database database;
     private AbstractView view;
 
-    public AbstractController(IModel model,AbstractView view){
-        this.model = model;
+    public AbstractController(Database database,AbstractView view){
+        this.database = database;
         this.view = view;
     }
 
     @Override
-    public void setModel(IModel model) {
-        this.model = model;
+    public void setModel(Database database) {
+        this.database = database;
     }
 
     @Override
