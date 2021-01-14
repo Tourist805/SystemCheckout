@@ -252,6 +252,7 @@ public class Database implements IModel{
             total += orderItems.get(i).getPrice();
         }
         count = total;
+        notifyObservers();
         return total;
     }
 
@@ -330,5 +331,13 @@ public class Database implements IModel{
         }
 
         return false;
+    }
+
+    public Admin getAdminAt(int index){
+        if(index < 0 && index > adminList.size()){
+            return null;
+        }
+
+        return adminList.get(index);
     }
 }

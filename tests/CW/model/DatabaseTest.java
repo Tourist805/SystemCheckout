@@ -1,5 +1,6 @@
 package CW.model;
 
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -50,4 +51,12 @@ public class DatabaseTest {
 
         assertEquals(database.adminCheck("july78", "22222w2"),true );
     }
+
+    @Test
+    public void testCompareToGetCount(){
+        database.loadOrderItems(new File(filepathOrder));
+
+        assertEquals(database.compareToGetCount(19.27),true);
+    }
+
 }
